@@ -18,13 +18,22 @@ class Snake {
 
   Direction direction = Direction::kUp;
 
+// STUDENT CODE -->
+  // Classes encapsulate behavior
   void ChangeDirection(Direction input_direction);
+  // Classes encapsulate behavior
   bool Alive() const { return alive; }
+  // Classes encapsulate behavior
   float GetHeadX() const { return head_x; }
+  // Classes encapsulate behavior
   float GetHeadY() const { return head_y; }
+  // The project makes use of references in function declarations.
   const std::vector<SDL_Point> &GetBody() const { return body; }
+  // Classes encapsulate behavior
   void SpeedScale(float factor) { speed *= factor; }
+  // Classes encapsulate behavior
   int GetSize() const { return size; }
+// <-- STUDENT CODE
 
 private:
 

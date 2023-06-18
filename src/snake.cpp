@@ -22,6 +22,7 @@ void Snake::Update() {
 
 void Snake::UpdateHead() {
     // STUDENT CODE -->
+    // Change game rule: the snake will be redirect if reach the bound or it's body
     bool is_reach_bound = false;
     std::pair<float, float> head_next_position = HeadNextPosition(head_x, head_y);
     float next_x = head_next_position.first;
@@ -114,6 +115,7 @@ bool Snake::SnakeCell(int x, int y) {
     return true;
   }
   // STUDENT CODE -->
+  // Use algorithm to check if cell is occupied by snake
   if(std::any_of(body.begin(), body.end(), [&](const SDL_Point &p){return p.x == x && p.y == y;}))
   {
     return true;
@@ -123,6 +125,7 @@ bool Snake::SnakeCell(int x, int y) {
 }
 
 // STUDENT CODE -->
+// Class constructors utilize member initialization lists.
 Snake::Snake(int grid_width, int grid_height)
     : grid_width(grid_width),
       grid_height(grid_height),
@@ -149,6 +152,7 @@ Snake::Snake(int grid_width, int grid_height)
         plus_x = 1;
         plus_y = 0;
     }
+    // Init the snake base on size and initial value of direction
     for (auto count = 1; count < size; count++)
     {
         SDL_Point cell{
@@ -158,6 +162,7 @@ Snake::Snake(int grid_width, int grid_height)
     }
 }
 
+// Caculate next position of the head of snake
 std::pair<float, float> Snake::HeadNextPosition(float x, float y) {
     switch (direction)
     {
@@ -180,6 +185,7 @@ std::pair<float, float> Snake::HeadNextPosition(float x, float y) {
     return std::pair<float, float>(x, y);
 }
 
+// Caculate next cell the snake 's head could be stored
 std::pair<int, int> Snake::NextCell()
 {
     std::pair<int, int> next_cell(0, 0);
@@ -207,17 +213,20 @@ std::pair<int, int> Snake::NextCell()
     return next_cell;
 }
 
+// Accepts user input and processes the input.
 void Snake::ChangeDirection(Direction input_direction)
 {
     Direction cur_direction = direction;
     direction = input_direction;
     std::pair<int, int> next_cell = NextCell();
     if (SnakeCell(next_cell.first, next_cell.second))
-        direction = cur_direction; 
+    // if the direction lead to snake body, keep the direction
+        direction = cur_direction;
     else
     {
         if (next_cell.first < 0 || next_cell.first >= grid_width ||
             next_cell.second < 0 || next_cell.second >= grid_height)
+            // if the direction lead to boundary, keep the direction
             direction = cur_direction;
     }
 }

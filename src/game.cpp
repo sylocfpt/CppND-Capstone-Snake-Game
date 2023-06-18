@@ -80,6 +80,7 @@ void Game::Update() {
     // Grow snake and increase speed.
     snake.GrowBody();
     // STUDENT CODE -->
+    // The project uses Object Oriented Programming techniques.
     snake.SpeedScale(1.1);
     // <-- STUDENT CODE
   }

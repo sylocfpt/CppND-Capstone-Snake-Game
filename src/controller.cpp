@@ -6,6 +6,7 @@
 void Controller::ChangeDirection(Snake &snake, Snake::Direction input,
                                  Snake::Direction opposite) const {
   // STUDENT CODE -->
+  // The project uses Object Oriented Programming techniques.
   snake.ChangeDirection(input);
   // <-- STUDENT CODE
   return;
